@@ -12,8 +12,8 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(registerUserThunk.fulfilled, (state, action) => {
-      state.userProfile = action.payload.newUser;
-      state.token = action.payload.token;
+      state.userProfile = action.payload?.responseToUser;
+      state.token = action.payload?.token;
     });
   },
 });
@@ -23,7 +23,14 @@ export default authSlice.reducer;
 export const registerUserThunk = createAsyncThunk(
   "auth/registeruser",
   async (formData) => {
-    const { data } = await registerUser(formData);
-    return data; 
+    try{
+      const { data, status} = await registerUser(formData);
+      console.log('authSlice and data is: ',)
+      console.log(status)
+      return data; 
+    } catch( error ) {
+      console.log(error.response.data)
+    }
+    
   }
 );

@@ -31,8 +31,8 @@ const Auth = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    console.log('dispatched.')
     dispatch(registerUserThunk(formData))
-
   }
 
   const handleChange = (event) => {
