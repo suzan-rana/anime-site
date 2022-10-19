@@ -3,9 +3,10 @@ import { Grid, Paper, Typography, Avatar, Button } from "@mui/material";
 import classes from "./styles";
 import { Container } from "@mui/system";
 import Input from "./Input";
-import { LockOutlinedIcon } from '@mui/icons-material'
-import { useDispatch } from 'react-redux'
-import { registerUserThunk } from "../../redux/slice/authSlice";
+import { LockOutlinedIcon } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+import { registerUserThunk, loginUserThunk } from "../../redux/slice/authSlice";
+import { useRouter } from "next/router";
 
 const initialState = {
   firstName: "",
@@ -20,6 +21,7 @@ const Auth = () => {
   const [registerMode, setRegisterMode] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleRegisterMode = () => {
     setRegisterMode((prevRegisterMode) => !prevRegisterMode);
@@ -30,10 +32,13 @@ const Auth = () => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log('dispatched.')
-    dispatch(registerUserThunk(formData))
-  }
+    event.preventDefault();
+    if (registerMode) {
+      dispatch(registerUserThunk(formData));
+    } else {
+      dispatch(loginUserThunk(formData))
+    }
+  };
 
   const handleChange = (event) => {
     setFormData((prevFormData) => ({
@@ -75,15 +80,14 @@ const Auth = () => {
               name="email"
               label="Email"
               handleChange={handleChange}
-              width='100%'
-              
+              width="100%"
             />
             <Input
               name="password"
               label="Password"
               handleChange={handleChange}
               handleShowPassword={handleShowPassword}
-              width='150px'
+              width="150px"
               type={showPassword ? "text" : "password"}
             />
             {registerMode && (
@@ -92,7 +96,7 @@ const Auth = () => {
                 label="Confirm Password"
                 handleChange={handleChange}
                 type={showPassword ? "text" : "password"}
-                width='100%'
+                width="100%"
               />
             )}
           </Grid>
@@ -105,7 +109,7 @@ const Auth = () => {
           >
             {registerMode ? "Sign up" : "Log In"}
           </Button>
-          <Grid container sx={{pl:2}}  >
+          <Grid container sx={{ pl: 2 }}>
             <Grid item>
               <Button onClick={handleRegisterMode}>
                 {registerMode
