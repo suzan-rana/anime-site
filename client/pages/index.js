@@ -1,15 +1,13 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import Link from 'next/link'
+import React from "react";
+import { Navbar, Main } from "../components";
 
 const Home = () => {
-  const { email, name} = useSelector( state => state.auth.userProfile)
-
-  return(
-    <>{email} and {name}
-    <Link href='/auth'>Sign up.</Link>
+  return (
+    <>
+      <Navbar />    
+      <Main />
     </>
-  )
-}
+  );
+};
 
-export default Home;  
+export default Home;
