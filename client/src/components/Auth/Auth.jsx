@@ -3,10 +3,10 @@ import { Grid, Paper, Typography, Avatar, Button } from "@mui/material";
 import classes from "./styles";
 import { Container } from "@mui/system";
 import Input from "./Input";
-import { LockOutlinedIcon } from "@mui/icons-material";
+
 import { useDispatch } from "react-redux";
 import { registerUserThunk, loginUserThunk } from "../../redux/slice/authSlice";
-import { useRouter } from "next/router";
+
 
 const initialState = {
   firstName: "",
@@ -21,7 +21,7 @@ const Auth = () => {
   const [registerMode, setRegisterMode] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-  const router = useRouter();
+ 
 
   const handleRegisterMode = () => {
     setRegisterMode((prevRegisterMode) => !prevRegisterMode);
