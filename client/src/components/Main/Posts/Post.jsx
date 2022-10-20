@@ -1,28 +1,38 @@
-import { Paper, Card, Typography, CardMedia, CardActions, CardContent, Button } from "@mui/material";
+import {
+  Paper,
+  Card,
+  Typography,
+  CardMedia,
+  CardActions,
+  CardContent,
+  Button,
+} from "@mui/material";
 import React from "react";
 
-const Post = () => {
+const Post = ({ post }) => {
+  // if(post )
   return (
-    <Paper  elevation={2}>
-      <Card >
-        <CardMedia
-          component="img"
-          height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
-          alt="green iguana"
-        />
+    <Paper elevation={2}>
+      <Card>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {post.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {post.description}
           </Typography>
         </CardContent>
+        {post.selectedFile && (
+          <CardMedia
+            component="img"
+            height="140"
+            image={post?.selectedFile}
+            alt="green iguana"
+          />
+        )}
         <CardActions>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
+          <Button size="small">Like</Button>
+          <Button size="small">Comment</Button>
         </CardActions>
       </Card>
     </Paper>

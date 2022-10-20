@@ -7,7 +7,7 @@ import { Grid, } from '@mui/material'
 const Main = () => {
   return (
     <>
-      <Grid container>
+      <Grid container spacing='4rem'>
         <Grid item xs={12} sm={3}>
           <CreatePost />
         </Grid>
