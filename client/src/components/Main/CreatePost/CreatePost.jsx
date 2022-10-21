@@ -26,15 +26,8 @@ const CreatePost = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     createPost(formData).then(() => {
-      console.log(
-        "before dispatched-----------------------------------------------"
-      );
       dispatch(fetchPostsThunk());
-    });
-
-    console.log(
-      "After dispatched================================================"
-    );
+    }).then( () => setFormData(initialState))
   };
 
   return (
@@ -50,6 +43,7 @@ const CreatePost = () => {
         </Typography>
         <TextField
           name="title"
+          value={formData.title}
           variant="outlined"
           label="Title"
           fullWidth
@@ -57,6 +51,7 @@ const CreatePost = () => {
         />
         <TextField
           name="description"
+          value={formData.description}
           variant="outlined"
           label="Message"
           fullWidth
@@ -67,6 +62,7 @@ const CreatePost = () => {
         <TextField
           name="tags"
           variant="outlined"
+          value={formData.tags}
           label="Tags (coma separated)"
           fullWidth
           onChange={handleChange}
@@ -75,6 +71,7 @@ const CreatePost = () => {
           <FileBase
             type="file"
             multiple={false}
+            value={formData.selectedFile}
             onDone={({ base64 }) =>
               setFormData((prevFormData) => ({
                 ...prevFormData,

@@ -1,7 +1,9 @@
 import Post from "../models/Post.js";
+import mongoose from "mongoose";
+
 const getPosts = async (req, res) => {
   const posts = await Post.find();
-  console.log(posts)
+  console.log(posts);
   res.status(200).json(posts);
 };
 
@@ -31,4 +33,22 @@ const createPost = async (req, res) => {
     });
   }
 };
-export { createPost, getPosts }
+
+const deletePost = async (req, res) => {
+  const id = req.params.id;
+  console.log(id)
+  const isValid = mongoose.Types.ObjectId.isValid(id);
+  try {
+    if (!isValid)
+      return res.status(400).json({
+        message: "Invalid post or id.",
+      });
+    await Post.findByIdAndRemove(id);
+    res.status(200).json({
+      message: "Deleted succesfully",
+    });
+  } catch (error) {
+    console.log("eror", error);
+  }
+};
+export { createPost, getPosts, deletePost };
