@@ -17,6 +17,5 @@ export default postSlice.reducer;
 
 export const fetchPostsThunk = createAsyncThunk("post/fetchposts", async () => {
   const { data } = await fetchPosts();
-  console.log("DATA IS: ", data);
   return data;
 });

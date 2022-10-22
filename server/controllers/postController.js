@@ -36,7 +36,7 @@ const createPost = async (req, res) => {
 
 const deletePost = async (req, res) => {
   const id = req.params.id;
-  console.log(id)
+  console.log(id);
   const isValid = mongoose.Types.ObjectId.isValid(id);
   try {
     if (!isValid)
@@ -51,4 +51,30 @@ const deletePost = async (req, res) => {
     console.log("eror", error);
   }
 };
-export { createPost, getPosts, deletePost };
+
+const likePost = async (req, res) => {
+  const postId = req.params.id;
+  const userId = req.userId;
+  const currentPost = await Post.findById(postId);
+  await Post.findByIdAndUpdate(postId, {
+    ...currentPost,
+    likes: currentPost.likes.push(userId),
+  });
+  res.status(200).json({
+    message: "Liked the post.",
+  });
+};
+
+const dislikePost = async (req, res) => {
+  const postId = req.params.id;
+  const userId = req.userId;
+  const currentPost = await Post.findById(postId);
+  await Post.findByIdAndUpdate(postId, {
+    ...currentPost,
+    likes: currentPost.likes.filter((id) => id !== userId),
+  });
+  res.status(200).json({
+    message: "Disliked the post.",
+  });
+};
+export { createPost, getPosts, deletePost, likePost, dislikePost };

@@ -3,10 +3,10 @@ import { Grid, Paper, Typography, Avatar, Button } from "@mui/material";
 import classes from "./styles";
 import { Container } from "@mui/system";
 import Input from "./Input";
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import { registerUserThunk, loginUserThunk } from "../../redux/slice/authSlice";
-
 
 const initialState = {
   firstName: "",
@@ -18,10 +18,11 @@ const initialState = {
 
 const Auth = () => {
   const [formData, setFormData] = useState(initialState);
-  const [registerMode, setRegisterMode] = useState(true);
+  const [registerMode, setRegisterMode] = useState(false);
+
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
- 
+  const navigate = useNavigate();
 
   const handleRegisterMode = () => {
     setRegisterMode((prevRegisterMode) => !prevRegisterMode);
@@ -34,11 +35,12 @@ const Auth = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (registerMode) {
-      dispatch(registerUserThunk(formData));
+      dispatch(registerUserThunk(formData)).then(() => navigate("/"));
     } else {
-      dispatch(loginUserThunk(formData))
+      dispatch(loginUserThunk(formData)).then(() => navigate("/"));
     }
   };
+  //
 
   const handleChange = (event) => {
     setFormData((prevFormData) => ({

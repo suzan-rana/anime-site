@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { registerUser, loginUser } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 const authSlice = createSlice({
   name: "auth",
@@ -9,6 +10,12 @@ const authSlice = createSlice({
       email: "",
     },
     token: "",
+  },
+  reducers: {
+    logout: (state) => {
+      localStorage.clear();
+      state = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -30,9 +37,8 @@ export const registerUserThunk = createAsyncThunk(
   async (formData) => {
     try {
       const { data, status } = await registerUser(formData);
-      console.log("authSlice and data is: ");
-      console.log(status);
 
+      localStorage.setItem("user", JSON.stringify(data));
       return data;
     } catch (error) {
       console.log(error.response.data);
@@ -44,10 +50,14 @@ export const loginUserThunk = createAsyncThunk(
   "auth/loginuser",
   async (formData) => {
     try {
-      const { data, status } = await loginUser(formData);
+      const { data } = await loginUser(formData);
+
+      localStorage.setItem("user", JSON.stringify(data));
       return data;
     } catch (error) {
       console.log(error);
     }
   }
 );
+
+export const { logout } = authSlice.actions;
