@@ -12,20 +12,18 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import React from "react";
 
 const Post = ({ user, post, handleDelete, handleLikePost, isLiked, index }) => {
-  
-  console.log(post);
   return (
     <Paper elevation={2}>
       <Card>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {post.title}
+            {post?.title || post?.character} 
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {post.description}
+            {post?.description || post?.quote}
           </Typography>
         </CardContent>
-        {post.selectedFile && (
+        {post?.selectedFile && (
           <CardMedia
             component="img"
             height="140"
@@ -45,7 +43,7 @@ const Post = ({ user, post, handleDelete, handleLikePost, isLiked, index }) => {
             </Button>
             <Button size="small">Comment</Button>
           </div>
-          {user?.responseToUser?.id === post.createrId && (
+          {user?.responseToUser?.id === post?.createrId && (
             <IconButton
               sx={{ marginRight: "2rem" }}
               onClick={() => handleDelete(post._id)}
