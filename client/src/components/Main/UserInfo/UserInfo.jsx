@@ -10,20 +10,14 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/slice/authSlice";
 
-const UserInfo = () => {
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
-  );
-  const dispatch = useDispatch();
-  console.log(user);
+const UserInfo = ({ user, setUser }) => {
+  const dispatch = useDispatch()
   const logoutHandler = () => {
     localStorage.clear();
     dispatch(logout());
     setUser(null)
   };
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("user")));
-  }, []);
+
 
   return (
     <Card

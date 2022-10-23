@@ -20,3 +20,5 @@ export const createPost = (formData) => api.post("/posts", formData);
 export const fetchPosts = () => api.get("/posts");
 
 export const deletePost = (id) => api.delete(`/posts/${id}`);
+export const likePost = (id) => api.patch(`/posts/like/${id}`)
+export const disLikePost = (id) => api.patch(`/posts/dislike/${id}`)

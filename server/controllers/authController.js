@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 const secret = "test";
 export const registerUser = async (req, res) => {
-  console.log("Request.");
   const { firstName, lastName, password, confirmPassword, email } = req.body;
   if (!firstName || !lastName || !password || !confirmPassword || !email)
     return res.status(400).json({ message: "Please fill all details." });
@@ -21,7 +20,6 @@ export const registerUser = async (req, res) => {
       email,
       password: hashedPassword,
     });
-    console.log(newUser);
     const token = jwt.sign({ email, id: newUser._id }, secret, {
       expiresIn: "1hr",
     });

@@ -26,6 +26,10 @@ const PostSchema = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  likeStatus: {
+    type: Boolean,
+    default: true,
+  }
 });
 
 export default mongoose.model("Post", PostSchema);
