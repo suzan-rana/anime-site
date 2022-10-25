@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getRandomQuotes } from "../../api/Anime";
+import {  getRandomQuotes } from "../../api/Anime";
 
 const animeSlice = createSlice({
   name: "anime",

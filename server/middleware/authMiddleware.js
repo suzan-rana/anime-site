@@ -13,6 +13,7 @@ const authMiddleware = (req, res, next) => {
 
     next();
   } catch (error) {
+    res.status(400).json({message: 'Ssssion expired'})
     console.log(error, "message is:", error.message);
   }
 };

@@ -64,8 +64,7 @@ const likePost = async (req, res) => {
   const currentPost = await Post.findById(postId);
   console.log(currentPost)
   const updatedPost = await Post.findByIdAndUpdate(postId, {
-    ...currentPost,
-    likeStatus: true,
+    likeStatus: !currentPost.likeStatus,
     likes: currentPost.likes.push(userId),
   });
   console.log(updatedPost);
@@ -83,7 +82,7 @@ const dislikePost = async (req, res) => {
   await Post.findByIdAndUpdate(postId, {
     ...currentPost,
     likes: currentPost.likes.filter((id) => id !== userId),
-    likeStatus: false,
+    likeStatus: !currentPost.likeStatus,
   });
   res.status(200).json({
     message: "Disliked the post.",

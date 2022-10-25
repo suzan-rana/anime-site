@@ -27,6 +27,7 @@ const UserInfo = ({ user, setUser }) => {
         paddingX: ".75rem",
         position: "absolute",
         marginRight: "2rem",
+        marginTop: '3.5rem'
       }}
     >
       <CardContent>

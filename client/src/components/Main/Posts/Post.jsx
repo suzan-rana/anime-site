@@ -38,10 +38,10 @@ const Post = ({ user, post, handleDelete, handleLikePost, isLiked, index }) => {
           }}
         >
           <div>
-            <Button size="small" onClick={() => handleLikePost(post._id)}>
-              {post.likeStatus ? "Dislike" : "Like"}
+            {/* <Button size="small" onClick={() => handleLikePost(post._id)}>
+              {post?.likeStatus ? "Dislike" : "Like"}
             </Button>
-            <Button size="small">Comment</Button>
+            <Button size="small">Comment</Button> */}
           </div>
           {user?.responseToUser?.id === post?.createrId && (
             <IconButton
